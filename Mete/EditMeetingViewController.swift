@@ -25,6 +25,10 @@ class EditMeetingViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
   }
 
+  override func viewDidAppear(animated: Bool) {
+    nameTextField.becomeFirstResponder()
+  }
+
   func keyboardWillShow(notification: NSNotification) {
     let keyboardRect = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue()
     animateForKeyboardRect(keyboardRect)

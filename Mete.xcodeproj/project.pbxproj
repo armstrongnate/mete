@@ -10,6 +10,8 @@
 		2FCD99FE321E7E656997CA75 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 261275DE0B582F2F55ECABCF /* libPods.a */; };
 		430C8EFE1AB1156F001A52C7 /* WelcomeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430C8EFD1AB1156F001A52C7 /* WelcomeSegue.swift */; };
 		433B69991AB003B300DC979F /* FancyTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433B69981AB003B300DC979F /* FancyTextFieldContainerView.swift */; };
+		434EF3621AB13713003BA351 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EF3611AB13713003BA351 /* ProfileViewController.swift */; };
+		434EF3641AB1609A003BA351 /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EF3631AB1609A003BA351 /* MeetingViewController.swift */; };
 		438759FB1AAFB06A003C3439 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438759FA1AAFB06A003C3439 /* AppDelegate.swift */; };
 		438759FD1AAFB06A003C3439 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438759FC1AAFB06A003C3439 /* ViewController.swift */; };
 		43875A001AAFB06A003C3439 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438759FE1AAFB06A003C3439 /* Main.storyboard */; };
@@ -35,6 +37,8 @@
 		430C8EFD1AB1156F001A52C7 /* WelcomeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeSegue.swift; sourceTree = "<group>"; };
 		433B69941AB0011E00DC979F /* Mete-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mete-Bridging-Header.h"; sourceTree = "<group>"; };
 		433B69981AB003B300DC979F /* FancyTextFieldContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyTextFieldContainerView.swift; sourceTree = "<group>"; };
+		434EF3611AB13713003BA351 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		434EF3631AB1609A003BA351 /* MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		438759F51AAFB06A003C3439 /* Mete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		438759F91AAFB06A003C3439 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		438759FA1AAFB06A003C3439 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 				433B69941AB0011E00DC979F /* Mete-Bridging-Header.h */,
 				433B69981AB003B300DC979F /* FancyTextFieldContainerView.swift */,
 				430C8EFD1AB1156F001A52C7 /* WelcomeSegue.swift */,
+				434EF3611AB13713003BA351 /* ProfileViewController.swift */,
+				434EF3631AB1609A003BA351 /* MeetingViewController.swift */,
 			);
 			path = Mete;
 			sourceTree = "<group>";
@@ -316,7 +322,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				434EF3621AB13713003BA351 /* ProfileViewController.swift in Sources */,
 				433B69991AB003B300DC979F /* FancyTextFieldContainerView.swift in Sources */,
+				434EF3641AB1609A003BA351 /* MeetingViewController.swift in Sources */,
 				438759FD1AAFB06A003C3439 /* ViewController.swift in Sources */,
 				430C8EFE1AB1156F001A52C7 /* WelcomeSegue.swift in Sources */,
 				438759FB1AAFB06A003C3439 /* AppDelegate.swift in Sources */,

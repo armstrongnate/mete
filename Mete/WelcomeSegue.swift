@@ -16,7 +16,7 @@ class FromWelcomeSegue: UIStoryboardSegue {
     let screenWidth = UIScreen.mainScreen().bounds.size.width
     let screenHeight = UIScreen.mainScreen().bounds.size.height
 
-    secondVCView.frame = CGRectMake(0.0, -screenHeight, screenWidth, screenHeight)
+    secondVCView.frame = CGRectMake(0.0, screenHeight, screenWidth, screenHeight)
 
     // insert into key window
     let window = UIApplication.sharedApplication().keyWindow
@@ -24,16 +24,16 @@ class FromWelcomeSegue: UIStoryboardSegue {
     window?.insertSubview(secondVCView, aboveSubview: firstVCView)
 
     // Animate
-    var frameAnim = POPSpringAnimation(propertyNamed: kPOPViewFrame)
-    frameAnim.springSpeed = 5.0
-    frameAnim.springBounciness = 5.0
-    frameAnim.toValue = NSValue(CGRect: CGRectOffset(firstVCView.frame, 0.0, screenHeight))
-    firstVCView.pop_addAnimation(frameAnim, forKey: "firstVCAnim")
-
+//    var frameAnim = POPSpringAnimation(propertyNamed: kPOPViewFrame)
+//    frameAnim.springSpeed = 5.0
+//    frameAnim.springBounciness = 5.0
+//    frameAnim.toValue = NSValue(CGRect: CGRectOffset(firstVCView.frame, 0.0, screenHeight))
+//    firstVCView.pop_addAnimation(frameAnim, forKey: "firstVCAnim")
+//
     var frameAnim2 = POPSpringAnimation(propertyNamed: kPOPViewFrame)
     frameAnim2.springSpeed = 5.0
     frameAnim2.springBounciness = 0.0
-    frameAnim2.toValue = NSValue(CGRect: CGRectOffset(secondVCView.frame, 0.0, screenHeight))
+    frameAnim2.toValue = NSValue(CGRect: CGRectOffset(secondVCView.frame, 0.0, -screenHeight))
     frameAnim2.completionBlock = { (animation, completed) in
       self.sourceViewController.presentViewController(self.destinationViewController as UIViewController, animated: false, completion: nil)
     }
@@ -50,27 +50,27 @@ class ToWelcomeSegue: UIStoryboardSegue {
     let screenWidth = UIScreen.mainScreen().bounds.size.width
     let screenHeight = UIScreen.mainScreen().bounds.size.height
 
-    secondVCView.frame = CGRectMake(0.0, screenHeight, screenWidth, screenHeight)
+    secondVCView.frame = CGRectMake(0.0, 0.0, screenWidth, screenHeight)
 
     // insert into key window
     let window = UIApplication.sharedApplication().keyWindow
-    window?.insertSubview(secondVCView, aboveSubview: firstVCView)
+    window?.insertSubview(secondVCView, belowSubview: firstVCView)
 
     // Animate
     var frameAnim = POPSpringAnimation(propertyNamed: kPOPViewFrame)
     frameAnim.springSpeed = 5.0
     frameAnim.springBounciness = 5.0
-    frameAnim.toValue = NSValue(CGRect: CGRectOffset(firstVCView.frame, 0.0, -screenHeight))
-    firstVCView.pop_addAnimation(frameAnim, forKey: "firstVCAnim")
-
-    var frameAnim2 = POPSpringAnimation(propertyNamed: kPOPViewFrame)
-    frameAnim2.springSpeed = 5.0
-    frameAnim2.springBounciness = 0.0
-    frameAnim2.toValue = NSValue(CGRect: CGRectOffset(secondVCView.frame, 0.0, -screenHeight))
-    frameAnim2.completionBlock = { (animation, completed) in
+    frameAnim.toValue = NSValue(CGRect: CGRectOffset(firstVCView.frame, 0.0, screenHeight))
+    frameAnim.completionBlock = { (animation, completed) in
       self.sourceViewController.presentViewController(self.destinationViewController as UIViewController, animated: false, completion: nil)
     }
-    secondVCView.pop_addAnimation(frameAnim2, forKey: "secondVCAnim")
+    firstVCView.pop_addAnimation(frameAnim, forKey: "firstVCAnim")
+
+//    var frameAnim2 = POPSpringAnimation(propertyNamed: kPOPViewFrame)
+//    frameAnim2.springSpeed = 5.0
+//    frameAnim2.springBounciness = 0.0
+//    frameAnim2.toValue = NSValue(CGRect: CGRectOffset(secondVCView.frame, 0.0, screenHeight))
+//    secondVCView.pop_addAnimation(frameAnim2, forKey: "secondVCAnim")
   }
 
 }
