@@ -8,11 +8,21 @@
 
 import UIKit
 
+protocol ProfileViewControllerDelegate {
+  func profileDidSave()
+}
+
 class ProfileViewController: UIViewController {
+
+  var delegate: ProfileViewControllerDelegate?
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
+  }
+
+  @IBAction func save() {
+    delegate?.profileDidSave()
   }
 
 }

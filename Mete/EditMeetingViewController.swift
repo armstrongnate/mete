@@ -29,22 +29,11 @@ class EditMeetingViewController: UIViewController {
     nameTextField.becomeFirstResponder()
   }
 
-  func keyboardWillShow(notification: NSNotification) {
-    let keyboardRect = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue()
-    animateForKeyboardRect(keyboardRect)
-  }
-
-  func keyboardWillHide(notification: NSNotification) {
-    animateForKeyboardRect(nil)
-  }
-
-  func animateForKeyboardRect(rect: CGRect?) {
-    let padding: CGFloat = 25.0
-    let layoutAnimation = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
-    layoutAnimation.springSpeed = 20.0
-    layoutAnimation.springBounciness = 5.0
-    layoutAnimation.toValue = rect == nil ? 0 : (CGRectGetMaxY(containerView.frame) - (CGRectGetHeight(view.frame) - rect!.height) + padding)
-    centerConstraint.pop_addAnimation(layoutAnimation, forKey: "animateForKeyboard")
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "toProfile" {
+      let profile = segue.destinationViewController.topViewController as ProfileViewController
+      profile.delegate = self
+    }
   }
 
   @IBAction func save(sender: UIBarButtonItem) {
@@ -72,4 +61,37 @@ extension EditMeetingViewController: UITextFieldDelegate {
     textField.resignFirstResponder()
     return true
   }
+
+  func keyboardWillShow(notification: NSNotification) {
+    let keyboardRect = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue()
+    animateForKeyboardRect(keyboardRect)
+  }
+
+  func keyboardWillHide(notification: NSNotification) {
+    animateForKeyboardRect(nil)
+  }
+
+  func animateForKeyboardRect(rect: CGRect?) {
+    let padding: CGFloat = 25.0
+    let layoutAnimation = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
+    layoutAnimation.springSpeed = 20.0
+    layoutAnimation.springBounciness = 5.0
+    layoutAnimation.toValue = rect == nil ? 0 : (CGRectGetMaxY(containerView.frame) - (CGRectGetHeight(view.frame) - rect!.height) + padding)
+    centerConstraint.pop_addAnimation(layoutAnimation, forKey: "animateForKeyboard")
+  }
+
+}
+
+extension EditMeetingViewController: ProfileViewControllerDelegate {
+
+  func profileDidSave() {
+    let window = UIApplication.sharedApplication().delegate!.window!!
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let meetingVC = storyboard.instantiateViewControllerWithIdentifier("meetingVC") as MeetingViewController
+    let navController = UINavigationController(rootViewController: meetingVC)
+    UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+      window.rootViewController = navController
+    }, completion: nil)
+  }
+
 }

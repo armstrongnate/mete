@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Mete" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="welcomeVC" id="BYZ-38-t0r" customClass="ViewController" customModule="Mete" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -281,7 +281,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Next" style="plain" id="iCK-gL-iW9">
                             <connections>
                                 <action selector="save:" destination="m1u-FM-Ztc" id="JeS-uX-z6K"/>
-                                <segue destination="aUD-Rh-XzA" kind="show" id="Uim-ca-BlZ"/>
+                                <segue destination="aUD-Rh-XzA" kind="show" identifier="toProfile" id="Uim-ca-BlZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -376,7 +376,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="ISi-ja-X3Z">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="is2-LD-qKZ">
                             <connections>
-                                <segue destination="Ou7-vI-8yp" kind="show" id="d49-O6-dnN"/>
+                                <action selector="save" destination="hxJ-aG-P0j" id="Omr-Tz-hlh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -388,7 +388,7 @@
         <!--Staff Meeting-->
         <scene sceneID="Wtt-fL-j4e">
             <objects>
-                <viewController id="Geq-8q-J35" customClass="MeetingViewController" customModule="Mete" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="meetingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Geq-8q-J35" customClass="MeetingViewController" customModule="Mete" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="o9W-7C-dNg"/>
                         <viewControllerLayoutGuide type="bottom" id="flE-rx-eiu"/>
@@ -445,11 +445,23 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFL-HW-y5o">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Item" id="xq2-Jv-X4Y"/>
+                                    <barButtonItem image="toolbar-share" id="xq2-Jv-X4Y">
+                                        <color key="tintColor" red="0.71372549019999998" green="0.28627450980000002" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ysj-XY-Jmw"/>
-                                    <barButtonItem title="Item" id="DoN-Wb-oJu"/>
+                                    <barButtonItem image="toolbar-exit" id="DoN-Wb-oJu">
+                                        <color key="tintColor" red="0.71372549019999998" green="0.28627450980000002" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="exit" destination="Geq-8q-J35" id="Jxz-vz-I6H"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="kLZ-6h-VAe"/>
-                                    <barButtonItem title="Item" id="Pd2-Zo-Kiq"/>
+                                    <barButtonItem image="toolbar-settings" id="Pd2-Zo-Kiq">
+                                        <color key="tintColor" red="0.71372549019999998" green="0.28627450980000002" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="kTe-Tx-lVq" kind="presentation" identifier="presentSettings" id="oK8-lz-wGk"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -474,7 +486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLl-jc-99c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5738" y="493"/>
+            <point key="canvasLocation" x="2559" y="1345"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EbE-nR-Xo5">
@@ -528,7 +540,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W27-Pg-n2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4926" y="493"/>
+            <point key="canvasLocation" x="1747" y="1345"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="toolbar-exit" width="22" height="22"/>
+        <image name="toolbar-settings" width="22" height="22"/>
+        <image name="toolbar-share" width="16" height="22"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oK8-lz-wGk"/>
+    </inferredMetricsTieBreakers>
 </document>
