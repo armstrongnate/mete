@@ -39,6 +39,7 @@ class MeetingViewController: UIViewController {
   }
 
   @IBAction func exit() {
+    btManager.stop()
     let window = UIApplication.sharedApplication().delegate!.window!!
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let welcomeVC = storyboard.instantiateViewControllerWithIdentifier("welcomeVC") as ViewController
@@ -46,7 +47,6 @@ class MeetingViewController: UIViewController {
     UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
       window.rootViewController = navController
     }, completion: nil)
-    btManager.stop()
   }
 
 }
