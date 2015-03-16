@@ -13,7 +13,7 @@ class FancyTextFieldContainerView: UIView {
   var innerShadowView: YIInnerShadowView = {
     let view = YIInnerShadowView(frame: CGRectZero)
     view.shadowRadius = 2.0
-    view.shadowColor = UIColor(white: 13/255.0, alpha: 1.0)
+    view.shadowColor = UIColor(white: 4/255.0, alpha: 1.0)
     view.shadowOffset = CGSizeMake(0.0, 1.0)
     view.shadowOpacity = 0.5
     return view

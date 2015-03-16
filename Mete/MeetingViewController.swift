@@ -11,10 +11,15 @@ import UIKit
 class MeetingViewController: UIViewController {
 
   @IBOutlet weak var timerView: UIView!
+  var btManager: BluetoothAttendeeManager!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     timerView.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
+
+    btManager = BluetoothAttendeeManager(displayName: "Staff Meeting")
+    btManager.delegate = self
+    btManager.start()
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -39,6 +44,14 @@ class MeetingViewController: UIViewController {
     UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
       window.rootViewController = navController
     }, completion: nil)
+  }
+
+}
+
+extension MeetingViewController: BluetoothAttendeeManagerDelegate {
+
+  func bluetoothConnected() {
+    btManager.sendMeetingID(24)
   }
 
 }

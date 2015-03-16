@@ -16,20 +16,17 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    let btnColor = UIColor(red: 182/255.0, green: 73/255.0, blue: 38/255.0, alpha: 1.0)
     hostButton.clipsToBounds = true
     hostButton.layer.cornerRadius = 5.0
-    joinButton.layer.borderWidth = 1.0
-    joinButton.layer.borderColor = UIColor(red: 72/255.0, green: 22/255.0, blue: 2/255.0, alpha: 1.0).CGColor
+    hostButton.backgroundColor = btnColor
 
     joinButton.clipsToBounds = true
+    joinButton.layer.borderWidth = 3.0
     joinButton.layer.cornerRadius = 5.0
-    joinButton.layer.borderWidth = 1.0
-    joinButton.layer.borderColor = UIColor(red: 151/255.0, green: 57/255.0, blue: 27/255.0, alpha: 1.0).CGColor
-
-    let image = UIImage(named: "hmuqlDBf")
-    welcomeImageView.contentMode = .ScaleAspectFill
-    welcomeImageView.clipsToBounds = true
-    welcomeImageView.image = image
+    joinButton.backgroundColor = UIColor.clearColor()
+    joinButton.layer.borderColor = btnColor.CGColor
+    joinButton.setTitleColor(btnColor, forState: .Normal)
 
     navigationController?.navigationBarHidden = true
   }
