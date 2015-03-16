@@ -45,9 +45,9 @@ class FancyTextFieldContainerView: UIView {
     insertSubview(innerView, atIndex: 0)
 
     // outer shadow
-    layer.shadowRadius = 5.0
-    layer.shadowColor = UIColor(white: 1.0, alpha: 1.0).CGColor
-    layer.shadowOpacity = 0.1
+    layer.shadowRadius = 2.0
+    layer.shadowColor = UIColor(red: 197/255.0, green: 88/255.0, blue: 53/255.0, alpha: 1.0).CGColor
+    layer.shadowOpacity = 1.0
     layer.shadowOffset = CGSizeMake(0.0, 0.0)
   }
 
