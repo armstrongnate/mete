@@ -41,7 +41,6 @@ extension JoinTableViewController: BluetoothAttendeeManagerDelegate {
   }
 
   func receivedMeetingID(meetingID: NSNumber) {
-    println("OMG I GOT A MEETING ID! \(meetingID)")
     dismissViewControllerAnimated(false) {
       let window = UIApplication.sharedApplication().delegate!.window!!
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
