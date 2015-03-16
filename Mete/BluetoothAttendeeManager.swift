@@ -54,6 +54,10 @@ class BluetoothAttendeeManager: NSObject {
     assistant.start()
   }
 
+  func stop() {
+    assistant.stop()
+  }
+
   func sendMeetingID(meetingID: NSNumber) -> NSError? {
     var error: NSError?
     let idAsData = NSKeyedArchiver.archivedDataWithRootObject(meetingID)

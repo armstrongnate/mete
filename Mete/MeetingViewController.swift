@@ -18,6 +18,8 @@ class MeetingViewController: UIViewController {
     timerView.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
 
     btManager = BluetoothAttendeeManager(displayName: "Staff Meeting")
+
+    // TODO: only advertise if i am the host
     btManager.delegate = self
     btManager.start()
   }
@@ -44,6 +46,7 @@ class MeetingViewController: UIViewController {
     UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
       window.rootViewController = navController
     }, completion: nil)
+    btManager.stop()
   }
 
 }
