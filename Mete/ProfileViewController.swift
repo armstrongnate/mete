@@ -15,10 +15,12 @@ protocol ProfileViewControllerDelegate {
 class ProfileViewController: UIViewController {
 
   var delegate: ProfileViewControllerDelegate?
+  @IBOutlet weak var nameTextField: UITextField!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
+    nameTextField.tintColor = UIColor.whiteColor()
   }
 
   @IBAction func save() {
