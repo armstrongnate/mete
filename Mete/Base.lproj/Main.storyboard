@@ -303,7 +303,7 @@
         <!--Profile-->
         <scene sceneID="JIg-m6-qJa">
             <objects>
-                <viewController id="hxJ-aG-P0j" customClass="ProfileViewController" customModule="Mete" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileVC" id="hxJ-aG-P0j" customClass="ProfileViewController" customModule="Mete" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Frb-rP-aTm"/>
                         <viewControllerLayoutGuide type="bottom" id="9gn-YU-Pbo"/>
