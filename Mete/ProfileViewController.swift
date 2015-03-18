@@ -8,14 +8,16 @@
 
 import UIKit
 
-protocol ProfileViewControllerDelegate {
-  func profileDidSave()
-}
-
 class ProfileViewController: UIViewController {
 
-  var delegate: ProfileViewControllerDelegate?
+  var meeting: Meeting!
   @IBOutlet weak var nameTextField: UITextField!
+  lazy var loaderView: LoaderView = {
+    let window = UIApplication.sharedApplication().keyWindow!
+    let view = LoaderView(frame: window.frame)
+    window.addSubview(view)
+    return view
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,7 +26,55 @@ class ProfileViewController: UIViewController {
   }
 
   @IBAction func save() {
-    delegate?.profileDidSave()
+    self.showLoader(true)
+    let name = nameTextField.text
+    let worth = 22 // TODO: get real worth
+    if let attendee = Mete.stores.currentAttendee.get() {
+      attendee.name = name
+      attendee.worth = worth
+      self.updateAttendee(attendee)
+    } else {
+      let attendee = Attendee(name: name, worth: worth)
+      self.createAttendee(attendee)
+    }
+  }
+
+  private func createAttendee(attendee: Attendee) {
+    Mete.api.createAttendee(attendee, forMeeting: Mete.stores.currentMeeting.get()!) { (record, error) in
+      self.showLoader(false)
+      if error == nil {
+        self.nameTextField.resignFirstResponder()
+        self.goToMeeting()
+      } else {
+        self.handleError(error)
+      }
+    }
+  }
+
+  private func updateAttendee(attendee: Attendee) {
+    Mete.api.saveAttendee(attendee) { (record, error) in
+      self.showLoader(false)
+      if error == nil {
+        self.performSegueWithIdentifier("unwindFromEditProfile", sender: self)
+      } else {
+        self.handleError(error)
+      }
+    }
+  }
+
+  func handleError(error: NSError) {
+    println("Error! \(error)") // TODO: handle error
+  }
+
+  func showLoader(show: Bool) {
+    loaderView.hidden = !show
+    navigationController?.navigationBarHidden = show
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    let window = UIApplication.sharedApplication().keyWindow!
+    loaderView.frame = window.frame
   }
 
 }

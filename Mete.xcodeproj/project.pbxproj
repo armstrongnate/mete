@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2FCD99FE321E7E656997CA75 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 261275DE0B582F2F55ECABCF /* libPods.a */; };
 		430C8EFE1AB1156F001A52C7 /* WelcomeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430C8EFD1AB1156F001A52C7 /* WelcomeSegue.swift */; };
+		4319E0951AB9390A006BFA40 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319E0941AB9390A006BFA40 /* LoaderView.swift */; };
+		43289E6F1AB91453008C25B0 /* CurrentAttendeeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43289E6E1AB91453008C25B0 /* CurrentAttendeeStore.swift */; };
 		433B69991AB003B300DC979F /* FancyTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433B69981AB003B300DC979F /* FancyTextFieldContainerView.swift */; };
 		434EF3621AB13713003BA351 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EF3611AB13713003BA351 /* ProfileViewController.swift */; };
 		434EF3641AB1609A003BA351 /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EF3631AB1609A003BA351 /* MeetingViewController.swift */; };
@@ -19,10 +21,19 @@
 		43875A051AAFB06A003C3439 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43875A031AAFB06A003C3439 /* LaunchScreen.xib */; };
 		43875A111AAFB06A003C3439 /* MeteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43875A101AAFB06A003C3439 /* MeteTests.swift */; };
 		43875A1B1AAFF37E003C3439 /* EditMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43875A1A1AAFF37E003C3439 /* EditMeetingViewController.swift */; };
+		4389013D1AB8F992007C97C9 /* AttendeeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389013C1AB8F992007C97C9 /* AttendeeStore.swift */; };
+		438901401AB903AC007C97C9 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389013F1AB903AC007C97C9 /* UIViewController+.swift */; };
 		43F5E5CD1AB3DAF000E03511 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5E5CC1AB3DAF000E03511 /* SearchViewController.swift */; };
 		43F5E5CF1AB67BDE00E03511 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F5E5CE1AB67BDE00E03511 /* MultipeerConnectivity.framework */; };
 		43F5E5D11AB67CBE00E03511 /* BluetoothAttendeeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5E5D01AB67CBE00E03511 /* BluetoothAttendeeManager.swift */; };
 		43F5E5D31AB6809B00E03511 /* JoinTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5E5D21AB6809B00E03511 /* JoinTableViewController.swift */; };
+		43F7D49B1AB7E66D0036BD1E /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7D49A1AB7E66D0036BD1E /* EventEmitter.swift */; };
+		43F7D49D1AB7EC1F0036BD1E /* CurrentMeetingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7D49C1AB7EC1F0036BD1E /* CurrentMeetingStore.swift */; };
+		43F7D49F1AB7EDE20036BD1E /* Mete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7D49E1AB7EDE20036BD1E /* Mete.swift */; };
+		43F7D4A21AB7F18F0036BD1E /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7D4A11AB7F18F0036BD1E /* Meeting.swift */; };
+		43F7D4A51AB7F3760036BD1E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F7D4A41AB7F3760036BD1E /* CloudKit.framework */; };
+		43F7D4A71AB7FB300036BD1E /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7D4A61AB7FB300036BD1E /* Attendee.swift */; };
+		43F7D4AA1AB801150036BD1E /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F7D4A91AB801150036BD1E /* Api.swift */; };
 		9578A587375B93B7C08E38C7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 261275DE0B582F2F55ECABCF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +50,8 @@
 /* Begin PBXFileReference section */
 		261275DE0B582F2F55ECABCF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		430C8EFD1AB1156F001A52C7 /* WelcomeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeSegue.swift; sourceTree = "<group>"; };
+		4319E0941AB9390A006BFA40 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderView.swift; path = Views/LoaderView.swift; sourceTree = "<group>"; };
+		43289E6E1AB91453008C25B0 /* CurrentAttendeeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentAttendeeStore.swift; path = Stores/CurrentAttendeeStore.swift; sourceTree = "<group>"; };
 		433B69941AB0011E00DC979F /* Mete-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mete-Bridging-Header.h"; sourceTree = "<group>"; };
 		433B69981AB003B300DC979F /* FancyTextFieldContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyTextFieldContainerView.swift; sourceTree = "<group>"; };
 		434EF3611AB13713003BA351 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -54,10 +67,20 @@
 		43875A0F1AAFB06A003C3439 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43875A101AAFB06A003C3439 /* MeteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeteTests.swift; sourceTree = "<group>"; };
 		43875A1A1AAFF37E003C3439 /* EditMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMeetingViewController.swift; sourceTree = "<group>"; };
+		4389013C1AB8F992007C97C9 /* AttendeeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttendeeStore.swift; path = Stores/AttendeeStore.swift; sourceTree = "<group>"; };
+		4389013F1AB903AC007C97C9 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+.swift"; path = "Utils/UIViewController+.swift"; sourceTree = "<group>"; };
 		43F5E5CC1AB3DAF000E03511 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		43F5E5CE1AB67BDE00E03511 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		43F5E5D01AB67CBE00E03511 /* BluetoothAttendeeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothAttendeeManager.swift; sourceTree = "<group>"; };
 		43F5E5D21AB6809B00E03511 /* JoinTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinTableViewController.swift; sourceTree = "<group>"; };
+		43F7D49A1AB7E66D0036BD1E /* EventEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventEmitter.swift; path = Stores/EventEmitter.swift; sourceTree = "<group>"; };
+		43F7D49C1AB7EC1F0036BD1E /* CurrentMeetingStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentMeetingStore.swift; path = Stores/CurrentMeetingStore.swift; sourceTree = "<group>"; };
+		43F7D49E1AB7EDE20036BD1E /* Mete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mete.swift; sourceTree = "<group>"; };
+		43F7D4A11AB7F18F0036BD1E /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Meeting.swift; path = Models/Meeting.swift; sourceTree = "<group>"; };
+		43F7D4A31AB7F36F0036BD1E /* Mete.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Mete.entitlements; sourceTree = "<group>"; };
+		43F7D4A41AB7F3760036BD1E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		43F7D4A61AB7FB300036BD1E /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attendee.swift; path = Models/Attendee.swift; sourceTree = "<group>"; };
+		43F7D4A91AB801150036BD1E /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Api.swift; path = Utils/Api.swift; sourceTree = "<group>"; };
 		65A4F094C22748044678EB27 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A063CC19A36E30070D9E8E0D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43F7D4A51AB7F3760036BD1E /* CloudKit.framework in Frameworks */,
 				43F5E5CF1AB67BDE00E03511 /* MultipeerConnectivity.framework in Frameworks */,
 				2FCD99FE321E7E656997CA75 /* libPods.a in Frameworks */,
 			);
@@ -86,10 +110,19 @@
 		34ECA9A0A21C19C013439333 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43F7D4A41AB7F3760036BD1E /* CloudKit.framework */,
 				43F5E5CE1AB67BDE00E03511 /* MultipeerConnectivity.framework */,
 				261275DE0B582F2F55ECABCF /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4319E0931AB938F5006BFA40 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4319E0941AB9390A006BFA40 /* LoaderView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		438759EC1AAFB06A003C3439 = {
@@ -115,6 +148,11 @@
 		438759F71AAFB06A003C3439 /* Mete */ = {
 			isa = PBXGroup;
 			children = (
+				4319E0931AB938F5006BFA40 /* Views */,
+				43F7D4A81AB801040036BD1E /* Utils */,
+				43F7D4A31AB7F36F0036BD1E /* Mete.entitlements */,
+				43F7D4A01AB7F1780036BD1E /* Models */,
+				43F7D4991AB7E6560036BD1E /* Stores */,
 				438759FA1AAFB06A003C3439 /* AppDelegate.swift */,
 				438759FC1AAFB06A003C3439 /* ViewController.swift */,
 				438759FE1AAFB06A003C3439 /* Main.storyboard */,
@@ -130,6 +168,7 @@
 				43F5E5CC1AB3DAF000E03511 /* SearchViewController.swift */,
 				43F5E5D01AB67CBE00E03511 /* BluetoothAttendeeManager.swift */,
 				43F5E5D21AB6809B00E03511 /* JoinTableViewController.swift */,
+				43F7D49E1AB7EDE20036BD1E /* Mete.swift */,
 			);
 			path = Mete;
 			sourceTree = "<group>";
@@ -157,6 +196,35 @@
 				43875A0F1AAFB06A003C3439 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43F7D4991AB7E6560036BD1E /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				43F7D49A1AB7E66D0036BD1E /* EventEmitter.swift */,
+				43F7D49C1AB7EC1F0036BD1E /* CurrentMeetingStore.swift */,
+				4389013C1AB8F992007C97C9 /* AttendeeStore.swift */,
+				43289E6E1AB91453008C25B0 /* CurrentAttendeeStore.swift */,
+			);
+			name = Stores;
+			sourceTree = "<group>";
+		};
+		43F7D4A01AB7F1780036BD1E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				43F7D4A11AB7F18F0036BD1E /* Meeting.swift */,
+				43F7D4A61AB7FB300036BD1E /* Attendee.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		43F7D4A81AB801040036BD1E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				43F7D4A91AB801150036BD1E /* Api.swift */,
+				4389013F1AB903AC007C97C9 /* UIViewController+.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		A16C8C7687D195F824ABC3B8 /* Pods */ = {
@@ -221,6 +289,12 @@
 				TargetAttributes = {
 					438759F41AAFB06A003C3439 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 8YM7FJN8FY;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					43875A091AAFB06A003C3439 = {
 						CreatedOnToolsVersion = 6.2;
@@ -335,15 +409,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43F7D4A71AB7FB300036BD1E /* Attendee.swift in Sources */,
+				43F7D49F1AB7EDE20036BD1E /* Mete.swift in Sources */,
 				434EF3621AB13713003BA351 /* ProfileViewController.swift in Sources */,
+				43F7D49D1AB7EC1F0036BD1E /* CurrentMeetingStore.swift in Sources */,
 				433B69991AB003B300DC979F /* FancyTextFieldContainerView.swift in Sources */,
 				43F5E5CD1AB3DAF000E03511 /* SearchViewController.swift in Sources */,
+				43F7D49B1AB7E66D0036BD1E /* EventEmitter.swift in Sources */,
 				43F5E5D31AB6809B00E03511 /* JoinTableViewController.swift in Sources */,
+				43F7D4A21AB7F18F0036BD1E /* Meeting.swift in Sources */,
 				434EF3641AB1609A003BA351 /* MeetingViewController.swift in Sources */,
 				438759FD1AAFB06A003C3439 /* ViewController.swift in Sources */,
+				43289E6F1AB91453008C25B0 /* CurrentAttendeeStore.swift in Sources */,
 				430C8EFE1AB1156F001A52C7 /* WelcomeSegue.swift in Sources */,
 				43F5E5D11AB67CBE00E03511 /* BluetoothAttendeeManager.swift in Sources */,
 				438759FB1AAFB06A003C3439 /* AppDelegate.swift in Sources */,
+				438901401AB903AC007C97C9 /* UIViewController+.swift in Sources */,
+				4389013D1AB8F992007C97C9 /* AttendeeStore.swift in Sources */,
+				4319E0951AB9390A006BFA40 /* LoaderView.swift in Sources */,
+				43F7D4AA1AB801150036BD1E /* Api.swift in Sources */,
 				43875A1B1AAFF37E003C3439 /* EditMeetingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,9 +555,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Mete/Mete.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mete/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Mete/Mete-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -485,9 +573,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Mete/Mete.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mete/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Mete/Mete-Bridging-Header.h";
 			};
 			name = Release;

@@ -11,6 +11,7 @@ import UIKit
 class MeetingViewController: UIViewController {
 
   @IBOutlet weak var timerView: UIView!
+  @IBOutlet weak var playButtonContainer: UIView!
   var btManager: BluetoothAttendeeManager!
 
   override func viewDidLoad() {
@@ -22,24 +23,28 @@ class MeetingViewController: UIViewController {
     // TODO: only advertise if i am the host
     btManager.delegate = self
     btManager.start()
+
+    Mete.stores.currentMeeting.addChangeListener(self, selector: "onChange")
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "presentSettings" {
+    if segue.identifier == "editMeeting" {
       let settings = segue.destinationViewController.topViewController as EditMeetingViewController
-      let btn = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "dismissSettings")
-      settings.navigationItem.rightBarButtonItem = btn
-      settings.navigationItem.leftBarButtonItem = nil
       settings.title = "Edit Meeting"
     }
   }
 
-  func dismissSettings() {
-    dismissViewControllerAnimated(true, completion: nil)
+  @IBAction func play() {
+    UIView.animateWithDuration(0.5, animations: { () -> Void in
+      self.playButtonContainer.alpha = 0.0
+    }) { (completed) -> Void in
+      self.playButtonContainer.hidden = true
+    }
   }
 
   @IBAction func exit() {
     btManager.stop()
+    Mete.stores.currentMeeting.clear()
     let window = UIApplication.sharedApplication().delegate!.window!!
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let welcomeVC = storyboard.instantiateViewControllerWithIdentifier("welcomeVC") as ViewController
@@ -47,6 +52,18 @@ class MeetingViewController: UIViewController {
     UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
       window.rootViewController = navController
     }, completion: nil)
+  }
+
+  @IBAction func unwindFromEditMeeting(segue: UIStoryboardSegue) {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+
+  @IBAction func unwindFromEditProfile(segue: UIStoryboardSegue) {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+
+  func onChange() {
+    // TODO: update timer and stuff
   }
 
 }

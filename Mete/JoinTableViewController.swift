@@ -44,25 +44,9 @@ extension JoinTableViewController: BluetoothAttendeeManagerDelegate {
     if presentedViewController == btManager.browser {
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
       let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as ProfileViewController
-      profile.delegate = self
       let navController = UINavigationController(rootViewController: profile)
       btManager.browser.presentViewController(navController, animated: true, completion: nil)
     }
   }
 
-}
-
-extension JoinTableViewController: ProfileViewControllerDelegate {
-
-  func profileDidSave() {
-    dismissViewControllerAnimated(false) {
-      let window = UIApplication.sharedApplication().delegate!.window!!
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let meetingVC = storyboard.instantiateViewControllerWithIdentifier("meetingVC") as MeetingViewController
-      let navController = UINavigationController(rootViewController: meetingVC)
-      UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-        window.rootViewController = navController
-      }, completion: nil)
-    }
-  }
 }
