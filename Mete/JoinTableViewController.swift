@@ -40,12 +40,25 @@ extension JoinTableViewController: BluetoothAttendeeManagerDelegate {
     dismissViewControllerAnimated(true, completion: nil)
   }
 
-  func receivedMeetingID(meetingID: NSNumber) {
+  func receivedMeetingEmail(email: String) {
     if presentedViewController == btManager.browser {
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as ProfileViewController
-      let navController = UINavigationController(rootViewController: profile)
-      btManager.browser.presentViewController(navController, animated: true, completion: nil)
+      Mete.api.getMeeting(email) { (record, error) in
+        if error == nil {
+
+          // disconnect from bluetooth session to free up # of peers
+          // and because we no longer need to communicate with the host
+          self.btManager.disconnect()
+
+          // create profile
+          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+          let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as ProfileViewController
+          let navController = UINavigationController(rootViewController: profile)
+          self.btManager.browser.presentViewController(navController, animated: true, completion: nil)
+        }
+        else {
+          println("error: \(error)")
+        }
+      }
     }
   }
 

@@ -12,26 +12,24 @@ import MultipeerConnectivity
 @objc protocol BluetoothAttendeeManagerDelegate {
   optional func browserViewControllerWasCancelled()
   optional func bluetoothConnected()
-  optional func receivedMeetingID(meetingID: NSNumber)
+  optional func receivedMeetingEmail(email: String)
 }
 
 class BluetoothAttendeeManager: NSObject {
 
   // public
   var delegate: BluetoothAttendeeManagerDelegate?
+  var displayName: String
   lazy var browser: MCBrowserViewController = {
     let browser = MCBrowserViewController(serviceType: self.serviceType,
       session: self.session)
     browser.delegate = self
-    browser.minimumNumberOfPeers = 1
-    browser.maximumNumberOfPeers = 1
     browser.navigationItem.rightBarButtonItem = nil
     return browser
   }()
 
   // private
   private var serviceType = "METE-MEETING"
-  private var displayName: String
   lazy private var peerID: MCPeerID = {
     return MCPeerID(displayName: self.displayName)
   }()
@@ -58,10 +56,14 @@ class BluetoothAttendeeManager: NSObject {
     assistant.stop()
   }
 
-  func sendMeetingID(meetingID: NSNumber) -> NSError? {
+  func disconnect() {
+    session.disconnect()
+  }
+
+  func sendMeetingEmail(email: String) -> NSError? {
     var error: NSError?
-    let idAsData = NSKeyedArchiver.archivedDataWithRootObject(meetingID)
-    session.sendData(idAsData, toPeers: session.connectedPeers, withMode: .Unreliable, error: &error)
+    let data = email.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+    session.sendData(data, toPeers: session.connectedPeers, withMode: .Unreliable, error: &error)
     return error
   }
 
@@ -71,8 +73,8 @@ extension BluetoothAttendeeManager: MCSessionDelegate {
   func session(session: MCSession!, didReceiveData data: NSData!,
     fromPeer peerID: MCPeerID!)  {
       dispatch_async(dispatch_get_main_queue()) {
-        let meetingID = NSKeyedUnarchiver.unarchiveObjectWithData(data) as NSNumber
-        self.delegate?.receivedMeetingID?(meetingID)
+        let email = NSString(data: data, encoding: NSUTF8StringEncoding)
+        self.delegate?.receivedMeetingEmail?(email!)
       }
   }
 

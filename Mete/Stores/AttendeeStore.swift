@@ -33,7 +33,7 @@ class AttendeeStore: EventEmitter {
 
   func update(attendee: Attendee) {
     if attendees[attendee.recordName!] != nil {
-      attendees[attendee.recordName!] = attendee
+      add(attendee)
     }
     emitChange()
   }

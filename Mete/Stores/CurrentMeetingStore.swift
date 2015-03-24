@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kCurrentMeetingEmailKey = "CurrentMeetingEmail"
+
 class CurrentMeetingStore: EventEmitter {
 
   var meeting: Meeting?
@@ -28,7 +30,7 @@ class CurrentMeetingStore: EventEmitter {
   func set(meeting: Meeting?) {
     self.meeting = meeting
     NSUserDefaults.standardUserDefaults().setObject(meeting?.email,
-      forKey: "CurrentMeetingEmail")
+      forKey: kCurrentMeetingEmailKey)
     emitChange()
   }
 

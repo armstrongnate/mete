@@ -32,13 +32,14 @@ class Api: NSObject {
     }
   }
 
-  func getMeeting(email: String) {
+  func getMeeting(email: String, completion: CKRecordResponse? = nil) {
     let meetingRecordID = CKRecordID(recordName: email)
     database.fetchRecordWithID(meetingRecordID) { (record, error) in
       if error == nil {
         let meeting = Meeting(record: record)
         Mete.stores.currentMeeting.set(meeting)
       }
+      self.performCompletion(completion, record, error)
     }
   }
 
@@ -78,6 +79,7 @@ class Api: NSObject {
       if error == nil {
         attendee.recordName = record.recordID.recordName
         Mete.stores.currentAttendee.set(attendee)
+        Mete.stores.attendee.add(attendee)
       }
       self.performCompletion(completion, record, error)
     }

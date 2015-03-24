@@ -39,7 +39,9 @@ class EventEmitter: NSObject {
   }
 
   private func postNotification(name: String) {
-    NSNotificationCenter.defaultCenter().postNotificationName(name, object: self)
+    dispatch_async(dispatch_get_main_queue()) {
+      NSNotificationCenter.defaultCenter().postNotificationName(name, object: self)
+    }
   }
 
 }

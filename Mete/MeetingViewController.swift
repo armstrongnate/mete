@@ -12,19 +12,31 @@ class MeetingViewController: UIViewController {
 
   @IBOutlet weak var timerView: UIView!
   @IBOutlet weak var playButtonContainer: UIView!
+  @IBOutlet weak var tableView: UITableView!
   var btManager: BluetoothAttendeeManager!
+  var attendees: [Attendee] = []
+  var meeting: Meeting? {
+    didSet {
+      if let meeting = self.meeting {
+        Mete.api.getAttendees(meeting)
+      }
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     timerView.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
 
-    btManager = BluetoothAttendeeManager(displayName: "Staff Meeting")
+    let displayName = UIDevice.currentDevice().name + "'s meeting."
+    btManager = BluetoothAttendeeManager(displayName: displayName)
 
     // TODO: only advertise if i am the host
     btManager.delegate = self
     btManager.start()
 
+    getStateFromStores()
     Mete.stores.currentMeeting.addChangeListener(self, selector: "onChange")
+    Mete.stores.attendee.addChangeListener(self, selector: "onChange")
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -45,6 +57,13 @@ class MeetingViewController: UIViewController {
   @IBAction func exit() {
     btManager.stop()
     Mete.stores.currentMeeting.clear()
+    Mete.stores.currentAttendee.clear()
+
+    // TODO: remove attendee from store
+
+    // TODO: delete meeting if host(?)
+
+    // exit to welcome view controller
     let window = UIApplication.sharedApplication().delegate!.window!!
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let welcomeVC = storyboard.instantiateViewControllerWithIdentifier("welcomeVC") as ViewController
@@ -62,8 +81,14 @@ class MeetingViewController: UIViewController {
     dismissViewControllerAnimated(true, completion: nil)
   }
 
+  func getStateFromStores() {
+    meeting = Mete.stores.currentMeeting.get()
+    attendees = Mete.stores.attendee.getAllAlpha()
+  }
+
   func onChange() {
-    // TODO: update timer and stuff
+    getStateFromStores()
+    tableView.reloadData()
   }
 
 }
@@ -71,7 +96,23 @@ class MeetingViewController: UIViewController {
 extension MeetingViewController: BluetoothAttendeeManagerDelegate {
 
   func bluetoothConnected() {
-    btManager.sendMeetingID(24)
+    if let email = meeting?.email {
+      btManager.sendMeetingEmail(email)
+    }
+  }
+
+}
+
+extension MeetingViewController: UITableViewDataSource {
+
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return attendees.count
+  }
+
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("attendeeCell", forIndexPath: indexPath) as UITableViewCell
+    cell.textLabel!.text = attendees[indexPath.row].name
+    return cell
   }
 
 }

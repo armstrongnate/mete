@@ -35,5 +35,9 @@ class ViewController: UIViewController {
     // noop
   }
 
+  @IBAction func unwindFromEditMeeting(segue: UIStoryboardSegue) {
+    // noop
+  }
+
 }
 
