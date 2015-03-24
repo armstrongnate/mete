@@ -10,7 +10,7 @@ import UIKit
 
 class FancyTextFieldContainerView: UIView {
 
-  var innerShadowView: YIInnerShadowView = {
+  lazy var innerShadow: YIInnerShadowView = {
     let view = YIInnerShadowView(frame: CGRectZero)
     view.shadowRadius = 2.0
     view.shadowColor = UIColor(white: 4/255.0, alpha: 1.0)
@@ -19,7 +19,14 @@ class FancyTextFieldContainerView: UIView {
     return view
   }()
 
-  var innerView: UIView!
+  var innerView = UIView()
+
+  var cornerRadius: CGFloat = 5.0 {
+    didSet {
+      layer.cornerRadius = cornerRadius
+      innerView.layer.cornerRadius = cornerRadius
+    }
+  }
 
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -33,15 +40,13 @@ class FancyTextFieldContainerView: UIView {
 
   func setup() {
     backgroundColor = UIColor(red: 132/255.0, green: 43/255.0, blue: 10/255.0, alpha: 1.0)
-    layer.cornerRadius = 5.0
     clipsToBounds = true
     layer.masksToBounds = false
+    cornerRadius = 5.0
 
     // inner shadow
-    innerView = UIView()
     innerView.layer.masksToBounds = true
-    innerView.layer.cornerRadius = 5.0
-    innerView.addSubview(innerShadowView)
+    innerView.addSubview(innerShadow)
     insertSubview(innerView, atIndex: 0)
 
     // outer shadow
@@ -54,7 +59,7 @@ class FancyTextFieldContainerView: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     innerView.frame = bounds
-    innerShadowView.frame = CGRectInset(bounds, -1.0, -1.0)
+    innerShadow.frame = CGRectInset(bounds, -1.0, -1.0)
   }
 
 }
