@@ -63,6 +63,8 @@ class WorthKeyboardView: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     view.frame = bounds
+    let ratio = doneButton.frame.size.height * 0.3
+    deleteButton.imageEdgeInsets = UIEdgeInsetsMake(ratio, ratio, ratio, ratio)
   }
 
   @IBAction func buttonPressed(sender: UIButton) {
