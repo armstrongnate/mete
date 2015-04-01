@@ -30,16 +30,16 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvo-tU-VWE">
-                                                    <rect key="frame" x="124" y="268" width="353" height="64"/>
+                                                    <rect key="frame" x="140" y="268.5" width="321" height="63"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fo9-7N-A3n">
-                                                            <rect key="frame" x="196" y="8" width="149" height="48"/>
+                                                            <rect key="frame" x="173" y="8" width="140" height="47"/>
                                                             <color key="backgroundColor" red="0.71372549019999998" green="0.28627450980000002" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="149" id="7jg-hT-T7X"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <inset key="contentEdgeInsets" minX="13" minY="13" maxX="13" maxY="13"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <inset key="contentEdgeInsets" minX="10" minY="13" maxX="10" maxY="13"/>
                                                             <state key="normal" title="Join a meeting">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,13 +54,13 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48i-f5-G1X">
-                                                            <rect key="frame" x="8" y="8" width="153" height="48"/>
+                                                            <rect key="frame" x="8" y="8" width="140" height="47"/>
                                                             <color key="backgroundColor" red="0.55686274509803924" green="0.15686274509803921" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="153" id="bjc-PD-Dtw"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <inset key="contentEdgeInsets" minX="13" minY="13" maxX="13" maxY="13"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <inset key="contentEdgeInsets" minX="10" minY="13" maxX="10" maxY="13"/>
                                                             <state key="normal" title="Host a meeting">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -82,13 +82,15 @@
                                                         <constraint firstItem="48i-f5-G1X" firstAttribute="top" secondItem="dvo-tU-VWE" secondAttribute="top" constant="8" id="7rF-LO-H3x"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="48i-f5-G1X" secondAttribute="bottom" id="A3m-gN-I4U"/>
                                                         <constraint firstAttribute="bottom" secondItem="48i-f5-G1X" secondAttribute="bottom" id="B02-qT-5Y3"/>
-                                                        <constraint firstItem="fo9-7N-A3n" firstAttribute="leading" secondItem="48i-f5-G1X" secondAttribute="trailing" constant="35" id="BvR-UV-Ssl"/>
+                                                        <constraint firstItem="fo9-7N-A3n" firstAttribute="leading" secondItem="48i-f5-G1X" secondAttribute="trailing" priority="250" constant="25" id="BvR-UV-Ssl"/>
                                                         <constraint firstItem="48i-f5-G1X" firstAttribute="top" secondItem="dvo-tU-VWE" secondAttribute="topMargin" id="EYZ-WL-v4A"/>
                                                         <constraint firstItem="48i-f5-G1X" firstAttribute="leading" secondItem="dvo-tU-VWE" secondAttribute="leading" constant="8" id="EhM-Hc-EYv"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="fo9-7N-A3n" secondAttribute="bottom" id="G9M-TT-2gq"/>
                                                         <constraint firstItem="48i-f5-G1X" firstAttribute="top" secondItem="dvo-tU-VWE" secondAttribute="top" id="IaP-T4-QTv"/>
                                                         <constraint firstAttribute="trailing" secondItem="fo9-7N-A3n" secondAttribute="trailing" constant="8" id="KPj-Eo-VhA"/>
                                                         <constraint firstAttribute="height" constant="50" id="LbC-A4-KNP"/>
+                                                        <constraint firstItem="fo9-7N-A3n" firstAttribute="top" secondItem="48i-f5-G1X" secondAttribute="bottom" constant="-48" id="ODl-x6-dVy"/>
+                                                        <constraint firstItem="fo9-7N-A3n" firstAttribute="top" secondItem="48i-f5-G1X" secondAttribute="bottom" constant="-48" id="Ol7-KQ-dhI"/>
                                                         <constraint firstItem="48i-f5-G1X" firstAttribute="leading" secondItem="dvo-tU-VWE" secondAttribute="leadingMargin" id="THh-DK-AdB"/>
                                                         <constraint firstAttribute="centerY" secondItem="fo9-7N-A3n" secondAttribute="centerY" id="Tte-Ap-kwg"/>
                                                         <constraint firstItem="48i-f5-G1X" firstAttribute="leading" secondItem="dvo-tU-VWE" secondAttribute="leading" id="YG7-FY-gLP"/>
@@ -97,6 +99,8 @@
                                                         <constraint firstAttribute="trailing" secondItem="fo9-7N-A3n" secondAttribute="trailing" id="gWx-ki-U46"/>
                                                         <constraint firstItem="fo9-7N-A3n" firstAttribute="leading" secondItem="48i-f5-G1X" secondAttribute="trailing" constant="34" id="iEh-e5-B0F"/>
                                                         <constraint firstAttribute="centerY" secondItem="48i-f5-G1X" secondAttribute="centerY" id="lWQ-hA-UXa"/>
+                                                        <constraint firstItem="fo9-7N-A3n" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="48i-f5-G1X" secondAttribute="trailing" constant="8" id="ueR-kY-S5H"/>
+                                                        <constraint firstItem="48i-f5-G1X" firstAttribute="width" secondItem="fo9-7N-A3n" secondAttribute="width" id="zCq-S2-7NW"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -111,6 +115,8 @@
                                                             <exclude reference="47B-tV-PLK"/>
                                                             <exclude reference="7Vm-VU-Bko"/>
                                                             <exclude reference="G9M-TT-2gq"/>
+                                                            <exclude reference="ODl-x6-dVy"/>
+                                                            <exclude reference="Ol7-KQ-dhI"/>
                                                             <exclude reference="Tte-Ap-kwg"/>
                                                             <exclude reference="c2E-7g-TLb"/>
                                                             <exclude reference="gWx-ki-U46"/>
@@ -120,6 +126,8 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="dvo-tU-VWE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5OV-S0-5p7" secondAttribute="leading" constant="4" id="K0v-gQ-Mip"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dvo-tU-VWE" secondAttribute="trailing" constant="4" id="SMn-g5-ow2"/>
                                                 <constraint firstAttribute="centerX" secondItem="dvo-tU-VWE" secondAttribute="centerX" id="fIr-eq-bUY"/>
                                                 <constraint firstAttribute="centerY" secondItem="dvo-tU-VWE" secondAttribute="centerY" id="nIF-tf-ZUf"/>
                                             </constraints>
@@ -853,7 +861,7 @@
         <image name="toolbar-share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oK8-lz-wGk"/>
         <segue reference="OFf-Kt-XBF"/>
+        <segue reference="Qop-bH-Zmi"/>
     </inferredMetricsTieBreakers>
 </document>
