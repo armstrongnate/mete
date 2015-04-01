@@ -84,6 +84,7 @@ class MeetingViewController: UIViewController {
   func getStateFromStores() {
     meeting = Mete.stores.currentMeeting.get()
     attendees = Mete.stores.attendee.getAllAlpha()
+    title = meeting?.name ?? "Meeting"
   }
 
   func onChange() {

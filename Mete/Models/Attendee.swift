@@ -14,11 +14,11 @@ let kCurrentAttendeeRecordNameKey = "CurrentAttendeeRecordNameKey"
 class Attendee: NSObject {
 
   var name: String
-  var worth: Int
+  var worth: Double
   var recordName: String?
 
 
-  init(name: String, worth: Int) {
+  init(name: String, worth: Double) {
     self.name = name
     self.worth = worth
     super.init()
@@ -26,7 +26,7 @@ class Attendee: NSObject {
 
   init(record: CKRecord) {
     self.name = record.objectForKey("name") as String
-    self.worth = record.objectForKey("worth") as Int
+    self.worth = record.objectForKey("worth") as Double
     self.recordName = record.recordID.recordName
     super.init()
   }

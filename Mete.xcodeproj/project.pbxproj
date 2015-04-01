@@ -8,9 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		2FCD99FE321E7E656997CA75 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 261275DE0B582F2F55ECABCF /* libPods.a */; };
-		430C8EFE1AB1156F001A52C7 /* WelcomeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430C8EFD1AB1156F001A52C7 /* WelcomeSegue.swift */; };
+		430C8EFE1AB1156F001A52C7 /* WorthSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430C8EFD1AB1156F001A52C7 /* WorthSegue.swift */; };
 		4319E0951AB9390A006BFA40 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319E0941AB9390A006BFA40 /* LoaderView.swift */; };
 		43289E6F1AB91453008C25B0 /* CurrentAttendeeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43289E6E1AB91453008C25B0 /* CurrentAttendeeStore.swift */; };
+		43344C5D1ACB913F0063D381 /* Worth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43344C5C1ACB913F0063D381 /* Worth.swift */; };
+		43344C5F1ACB91790063D381 /* WorthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43344C5E1ACB91790063D381 /* WorthTests.swift */; };
+		43344C601ACB91BC0063D381 /* Worth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43344C5C1ACB913F0063D381 /* Worth.swift */; };
+		433B3CB81ACA4514006EBB0F /* WorthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433B3CB71ACA4514006EBB0F /* WorthViewController.swift */; };
+		433B3CBA1ACA7307006EBB0F /* ProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433B3CB91ACA7307006EBB0F /* ProfileNavigationController.swift */; };
+		433B3CBC1ACAF96E006EBB0F /* WorthKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 433B3CBB1ACAF96E006EBB0F /* WorthKeyboardView.xib */; };
+		433B3CBE1ACAFA4E006EBB0F /* WorthKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433B3CBD1ACAFA4E006EBB0F /* WorthKeyboardView.swift */; };
 		433B69991AB003B300DC979F /* FancyTextFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433B69981AB003B300DC979F /* FancyTextFieldContainerView.swift */; };
 		434EF3621AB13713003BA351 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EF3611AB13713003BA351 /* ProfileViewController.swift */; };
 		434EF3641AB1609A003BA351 /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EF3631AB1609A003BA351 /* MeetingViewController.swift */; };
@@ -49,9 +56,15 @@
 
 /* Begin PBXFileReference section */
 		261275DE0B582F2F55ECABCF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		430C8EFD1AB1156F001A52C7 /* WelcomeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeSegue.swift; sourceTree = "<group>"; };
+		430C8EFD1AB1156F001A52C7 /* WorthSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorthSegue.swift; sourceTree = "<group>"; };
 		4319E0941AB9390A006BFA40 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderView.swift; path = Views/LoaderView.swift; sourceTree = "<group>"; };
 		43289E6E1AB91453008C25B0 /* CurrentAttendeeStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentAttendeeStore.swift; path = Stores/CurrentAttendeeStore.swift; sourceTree = "<group>"; };
+		43344C5C1ACB913F0063D381 /* Worth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Worth.swift; path = Utils/Worth.swift; sourceTree = "<group>"; };
+		43344C5E1ACB91790063D381 /* WorthTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorthTests.swift; sourceTree = "<group>"; };
+		433B3CB71ACA4514006EBB0F /* WorthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorthViewController.swift; sourceTree = "<group>"; };
+		433B3CB91ACA7307006EBB0F /* ProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNavigationController.swift; sourceTree = "<group>"; };
+		433B3CBB1ACAF96E006EBB0F /* WorthKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WorthKeyboardView.xib; path = Views/WorthKeyboardView.xib; sourceTree = "<group>"; };
+		433B3CBD1ACAFA4E006EBB0F /* WorthKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorthKeyboardView.swift; path = Views/WorthKeyboardView.swift; sourceTree = "<group>"; };
 		433B69941AB0011E00DC979F /* Mete-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mete-Bridging-Header.h"; sourceTree = "<group>"; };
 		433B69981AB003B300DC979F /* FancyTextFieldContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyTextFieldContainerView.swift; sourceTree = "<group>"; };
 		434EF3611AB13713003BA351 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -162,13 +175,16 @@
 				43875A1A1AAFF37E003C3439 /* EditMeetingViewController.swift */,
 				433B69941AB0011E00DC979F /* Mete-Bridging-Header.h */,
 				433B69981AB003B300DC979F /* FancyTextFieldContainerView.swift */,
-				430C8EFD1AB1156F001A52C7 /* WelcomeSegue.swift */,
+				430C8EFD1AB1156F001A52C7 /* WorthSegue.swift */,
 				434EF3611AB13713003BA351 /* ProfileViewController.swift */,
 				434EF3631AB1609A003BA351 /* MeetingViewController.swift */,
 				43F5E5CC1AB3DAF000E03511 /* SearchViewController.swift */,
 				43F5E5D01AB67CBE00E03511 /* BluetoothAttendeeManager.swift */,
 				43F5E5D21AB6809B00E03511 /* JoinTableViewController.swift */,
 				43F7D49E1AB7EDE20036BD1E /* Mete.swift */,
+				433B3CB71ACA4514006EBB0F /* WorthViewController.swift */,
+				433B3CB91ACA7307006EBB0F /* ProfileNavigationController.swift */,
+				433B3CBB1ACAF96E006EBB0F /* WorthKeyboardView.xib */,
 			);
 			path = Mete;
 			sourceTree = "<group>";
@@ -186,6 +202,7 @@
 			children = (
 				43875A101AAFB06A003C3439 /* MeteTests.swift */,
 				43875A0E1AAFB06A003C3439 /* Supporting Files */,
+				43344C5E1ACB91790063D381 /* WorthTests.swift */,
 			);
 			path = MeteTests;
 			sourceTree = "<group>";
@@ -223,6 +240,8 @@
 			children = (
 				43F7D4A91AB801150036BD1E /* Api.swift */,
 				4389013F1AB903AC007C97C9 /* UIViewController+.swift */,
+				433B3CBD1ACAFA4E006EBB0F /* WorthKeyboardView.swift */,
+				43344C5C1ACB913F0063D381 /* Worth.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -328,6 +347,7 @@
 			files = (
 				43875A001AAFB06A003C3439 /* Main.storyboard in Resources */,
 				43875A051AAFB06A003C3439 /* LaunchScreen.xib in Resources */,
+				433B3CBC1ACAF96E006EBB0F /* WorthKeyboardView.xib in Resources */,
 				43875A021AAFB06A003C3439 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +431,7 @@
 			files = (
 				43F7D4A71AB7FB300036BD1E /* Attendee.swift in Sources */,
 				43F7D49F1AB7EDE20036BD1E /* Mete.swift in Sources */,
+				43344C5D1ACB913F0063D381 /* Worth.swift in Sources */,
 				434EF3621AB13713003BA351 /* ProfileViewController.swift in Sources */,
 				43F7D49D1AB7EC1F0036BD1E /* CurrentMeetingStore.swift in Sources */,
 				433B69991AB003B300DC979F /* FancyTextFieldContainerView.swift in Sources */,
@@ -420,13 +441,16 @@
 				43F7D4A21AB7F18F0036BD1E /* Meeting.swift in Sources */,
 				434EF3641AB1609A003BA351 /* MeetingViewController.swift in Sources */,
 				438759FD1AAFB06A003C3439 /* ViewController.swift in Sources */,
+				433B3CBE1ACAFA4E006EBB0F /* WorthKeyboardView.swift in Sources */,
 				43289E6F1AB91453008C25B0 /* CurrentAttendeeStore.swift in Sources */,
-				430C8EFE1AB1156F001A52C7 /* WelcomeSegue.swift in Sources */,
+				430C8EFE1AB1156F001A52C7 /* WorthSegue.swift in Sources */,
 				43F5E5D11AB67CBE00E03511 /* BluetoothAttendeeManager.swift in Sources */,
 				438759FB1AAFB06A003C3439 /* AppDelegate.swift in Sources */,
 				438901401AB903AC007C97C9 /* UIViewController+.swift in Sources */,
+				433B3CB81ACA4514006EBB0F /* WorthViewController.swift in Sources */,
 				4389013D1AB8F992007C97C9 /* AttendeeStore.swift in Sources */,
 				4319E0951AB9390A006BFA40 /* LoaderView.swift in Sources */,
+				433B3CBA1ACA7307006EBB0F /* ProfileNavigationController.swift in Sources */,
 				43F7D4AA1AB801150036BD1E /* Api.swift in Sources */,
 				43875A1B1AAFF37E003C3439 /* EditMeetingViewController.swift in Sources */,
 			);
@@ -436,6 +460,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43344C601ACB91BC0063D381 /* Worth.swift in Sources */,
+				43344C5F1ACB91790063D381 /* WorthTests.swift in Sources */,
 				43875A111AAFB06A003C3439 /* MeteTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
