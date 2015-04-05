@@ -13,8 +13,16 @@ class MeetingViewController: UIViewController {
   @IBOutlet weak var timerView: UIView!
   @IBOutlet weak var playButtonContainer: UIView!
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var timeLabel: UILabel!
+  @IBOutlet weak var costLabel: UILabel!
+  var totalWorth: Double = 0
+  var durationSeconds: Double = 0
   var btManager: BluetoothAttendeeManager!
-  var attendees: [Attendee] = []
+  var attendees: [Attendee] = [] {
+    didSet {
+      totalWorth = attendees.reduce(0.0, { $0 + $1.worth })
+    }
+  }
   var meeting: Meeting? {
     didSet {
       if let meeting = self.meeting {
@@ -22,6 +30,12 @@ class MeetingViewController: UIViewController {
       }
     }
   }
+  var timer: NSTimer?
+  lazy var numberFormatter: NSNumberFormatter = {
+    let formatter = NSNumberFormatter()
+    formatter.numberStyle = .CurrencyStyle
+    return formatter
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -58,11 +72,14 @@ class MeetingViewController: UIViewController {
       self.playButtonContainer.alpha = 0.0
     }) { (completed) -> Void in
       self.playButtonContainer.hidden = true
+      self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "tick", userInfo: nil, repeats: true)
+      self.timer!.fire()
     }
   }
 
   @IBAction func exit() {
     btManager.stop()
+    timer?.invalidate()
     Mete.stores.currentMeeting.clear()
     Mete.stores.currentAttendee.clear()
 
@@ -97,6 +114,21 @@ class MeetingViewController: UIViewController {
   func onChange() {
     getStateFromStores()
     tableView.reloadData()
+  }
+
+  func tick() {
+    durationSeconds += 1
+    let hours = Int(floor(durationSeconds / 3600))
+    let minutes = Int(floor(durationSeconds / 60) % 60)
+    let seconds = Int(durationSeconds % 60)
+    let pHours = String(format: "%02d", hours)
+    let pMins = String(format: "%02d", minutes)
+    let pSeconds = String(format: "%02d", seconds)
+    let cost = (durationSeconds / 3600) * totalWorth
+    dispatch_async(dispatch_get_main_queue()) {
+      self.timeLabel.text = "\(pHours):\(pMins):\(pSeconds)"
+      self.costLabel.text = self.numberFormatter.stringFromNumber(NSNumber(double: cost))
+    }
   }
 
 }
