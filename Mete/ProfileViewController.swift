@@ -10,7 +10,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-  var meeting: Meeting!
   @IBOutlet weak var nameTextFieldContainer: UIView!
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var nameHintLabel: UILabel!
@@ -25,6 +24,7 @@ class ProfileViewController: UIViewController {
   }()
 
   var worth: Worth!
+  var host = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -65,7 +65,9 @@ class ProfileViewController: UIViewController {
   }
 
   private func createAttendee(attendee: Attendee) {
-    Mete.api.createAttendee(attendee, forMeeting: Mete.stores.currentMeeting.get()!) { (record, error) in
+    let meeting = Mete.stores.currentMeeting.get()!
+    attendee.host = host
+    Mete.api.createAttendee(attendee, forMeeting: meeting) { (record, error) in
       self.showLoader(false)
       if error == nil {
         self.nameTextField.resignFirstResponder()

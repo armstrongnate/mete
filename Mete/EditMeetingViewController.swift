@@ -14,11 +14,13 @@ class EditMeetingViewController: UIViewController {
   @IBOutlet weak var codeTextField: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
 
-  var meeting: Meeting {
+  var formData: Meeting {
     let name = nameTextField.text
     let email = codeTextField.text
     return Meeting(name: name, email: email)
   }
+
+  var meeting: Meeting?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,7 +28,7 @@ class EditMeetingViewController: UIViewController {
     codeTextField.tintColor = UIColor.whiteColor()
     nameTextField.tintColor = UIColor.whiteColor()
     navigationController?.navigationBarHidden
-    if let meeting = Mete.stores.currentMeeting.get() {
+    if let meeting = meeting {
       nameTextField.text = meeting.name
       codeTextField.text = meeting.email
     }
@@ -37,6 +39,7 @@ class EditMeetingViewController: UIViewController {
   }
 
   @IBAction func save(sender: UIBarButtonItem) {
+    let meeting = formData
     Mete.stores.currentMeeting.set(meeting)
     if Mete.stores.currentAttendee.get() == nil {
       self.performSegueWithIdentifier("editProfile", sender: self)
@@ -44,6 +47,13 @@ class EditMeetingViewController: UIViewController {
       self.performSegueWithIdentifier("unwindFromEditMeeting", sender: self)
     }
     Mete.api.saveMeeting(meeting)
+  }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "editProfile" {
+      let profile = segue.destinationViewController.topViewController as ProfileViewController
+      profile.host = true
+    }
   }
 
 }

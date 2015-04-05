@@ -16,6 +16,7 @@ class Attendee: NSObject {
   var name: String
   var worth: Double
   var recordName: String?
+  var host = false
 
 
   init(name: String, worth: Double) {
@@ -28,6 +29,7 @@ class Attendee: NSObject {
     self.name = record.objectForKey("name") as String
     self.worth = record.objectForKey("worth") as Double
     self.recordName = record.recordID.recordName
+    self.host = record.objectForKey("host") as Bool
     super.init()
   }
 
@@ -46,6 +48,7 @@ class Attendee: NSObject {
   func toCKRecord(record: CKRecord) -> CKRecord {
     record.setObject(name, forKey: "name")
     record.setObject(worth, forKey: "worth")
+    record.setObject(host, forKey: "host")
     return record
   }
    

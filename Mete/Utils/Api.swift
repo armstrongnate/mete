@@ -13,10 +13,10 @@ class Api: NSObject {
 
   typealias CKRecordResponse = (record: CKRecord!, error: NSError!) -> Void
 
-  var database: CKDatabase {
+  lazy var database: CKDatabase = {
     let container = CKContainer.defaultContainer()
     return container.publicCloudDatabase
-  }
+  }()
 
 
   func saveMeeting(meeting: Meeting, completion: CKRecordResponse? = nil) {
@@ -76,10 +76,13 @@ class Api: NSObject {
     let meetingReference = CKReference(record: meetingRecord, action: .None)
     record.setObject(meetingReference, forKey: "meeting")
     database.saveRecord(record) { (record, error) in
-      if error == nil {
+      func success() {
         attendee.recordName = record.recordID.recordName
         Mete.stores.currentAttendee.set(attendee)
         Mete.stores.attendee.add(attendee)
+      }
+      if error == nil {
+        success()
       }
       self.performCompletion(completion, record, error)
     }

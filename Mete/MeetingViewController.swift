@@ -29,10 +29,17 @@ class MeetingViewController: UIViewController {
 
     let displayName = UIDevice.currentDevice().name + "'s meeting."
     btManager = BluetoothAttendeeManager(displayName: displayName)
-
-    // TODO: only advertise if i am the host
     btManager.delegate = self
-    btManager.start()
+
+    // only advertise if i am the host
+    if let attendee = Mete.stores.currentAttendee.get() {
+      if attendee.host {
+        btManager.start()
+      } else {
+        playButtonContainer.hidden = true
+        btManager.stop()
+      }
+    }
 
     getStateFromStores()
     Mete.stores.currentMeeting.addChangeListener(self, selector: "onChange")
