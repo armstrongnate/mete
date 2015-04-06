@@ -13,7 +13,9 @@ class AttendeeStore: EventEmitter {
   var attendees: [String: Attendee] = [:]
 
   func emitChange() {
-    emit(.Change)
+    dispatch_async(dispatch_get_main_queue()) {
+      self.emit(.Change)
+    }
   }
 
   func addChangeListener(listener: AnyObject, selector: Selector) {
@@ -40,6 +42,11 @@ class AttendeeStore: EventEmitter {
 
   func add(attendee: Attendee) {
     attendees[attendee.recordName!] = attendee
+    emitChange()
+  }
+
+  func clear() {
+    attendees = [:]
     emitChange()
   }
    

@@ -27,15 +27,30 @@ class MeetingViewController: UIViewController {
     didSet {
       if let meeting = self.meeting {
         Mete.api.getAttendees(meeting)
+        if let startedAt = meeting.startedAt {
+          if timer == nil {
+            durationSeconds = abs(startedAt.timeIntervalSinceNow)
+            startTimer()
+          }
+        }
+      } else {
+        exit()
       }
     }
   }
   var timer: NSTimer?
+  var refreshTimer: NSTimer!
   lazy var numberFormatter: NSNumberFormatter = {
     let formatter = NSNumberFormatter()
     formatter.numberStyle = .CurrencyStyle
     return formatter
   }()
+  var host: Bool {
+    if let attendee = Mete.stores.currentAttendee.get() {
+      return attendee.host
+    }
+    return false
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,18 +61,23 @@ class MeetingViewController: UIViewController {
     btManager.delegate = self
 
     // only advertise if i am the host
-    if let attendee = Mete.stores.currentAttendee.get() {
-      if attendee.host {
-        btManager.start()
-      } else {
-        playButtonContainer.hidden = true
-        btManager.stop()
-      }
+    if host {
+      btManager.start()
+    } else {
+      playButtonContainer.hidden = true
+      btManager.stop()
     }
 
     getStateFromStores()
     Mete.stores.currentMeeting.addChangeListener(self, selector: "onChange")
     Mete.stores.attendee.addChangeListener(self, selector: "onChange")
+
+    refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refresh", userInfo: nil, repeats: true)
+  }
+
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    refresh()
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -72,29 +92,41 @@ class MeetingViewController: UIViewController {
       self.playButtonContainer.alpha = 0.0
     }) { (completed) -> Void in
       self.playButtonContainer.hidden = true
-      self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "tick", userInfo: nil, repeats: true)
-      self.timer!.fire()
+      self.startTimer()
+      if let meeting = self.meeting {
+        meeting.startedAt = NSDate()
+        Mete.api.saveMeeting(meeting)
+      }
     }
+  }
+
+  func startTimer() {
+    timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "tick", userInfo: nil, repeats: true)
   }
 
   @IBAction func exit() {
     btManager.stop()
     timer?.invalidate()
-    Mete.stores.currentMeeting.clear()
-    Mete.stores.currentAttendee.clear()
+    refreshTimer.invalidate()
+    NSNotificationCenter.defaultCenter().removeObserver(self)
 
-    // TODO: remove attendee from store
+    // delete attendee (clears currentAttendee on success)
+    if let attendee = Mete.stores.currentAttendee.get() {
+      Mete.api.deleteAttendee(attendee)
+    }
 
-    // TODO: delete meeting if host(?)
+    // delete meeting (clears currentMeeting on success)
+    if let meeting = Mete.stores.currentMeeting.get() {
+      if host {
+        Mete.api.deleteMeeting(meeting)
+      }
+    }
 
     // exit to welcome view controller
     let window = UIApplication.sharedApplication().delegate!.window!!
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let welcomeVC = storyboard.instantiateViewControllerWithIdentifier("welcomeVC") as ViewController
-    let navController = UINavigationController(rootViewController: welcomeVC)
-    UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-      window.rootViewController = navController
-    }, completion: nil)
+    window.rootViewController = welcomeVC
   }
 
   @IBAction func unwindFromEditMeeting(segue: UIStoryboardSegue) {
@@ -128,6 +160,16 @@ class MeetingViewController: UIViewController {
     dispatch_async(dispatch_get_main_queue()) {
       self.timeLabel.text = "\(pHours):\(pMins):\(pSeconds)"
       self.costLabel.text = self.numberFormatter.stringFromNumber(NSNumber(double: cost))
+    }
+  }
+
+  func refresh() {
+    if let email = meeting?.email {
+      Mete.api.getMeeting(email) { (record, error) in
+        if error != nil {
+          self.exit()
+        }
+      }
     }
   }
 

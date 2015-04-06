@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     joinButton.setTitleColor(btnColor, forState: .Normal)
 
     navigationController?.navigationBarHidden = true
+
+    Mete.stores.attendee.clear()
   }
 
   @IBAction func unwindFromLeaveWelcome(segue: UIStoryboardSegue) {

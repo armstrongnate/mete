@@ -32,6 +32,15 @@ class Api: NSObject {
     }
   }
 
+  func deleteMeeting(meeting: Meeting) {
+    let recordID = CKRecordID(recordName: meeting.email)
+    database.deleteRecordWithID(recordID) { (record, error) in
+      if error == nil {
+        Mete.stores.currentMeeting.set(nil)
+      }
+    }
+  }
+
   func getMeeting(email: String, completion: CKRecordResponse? = nil) {
     let meetingRecordID = CKRecordID(recordName: email)
     database.fetchRecordWithID(meetingRecordID) { (record, error) in
@@ -52,6 +61,15 @@ class Api: NSObject {
           Mete.stores.attendee.update(attendee)
         }
         self.performCompletion(completion, record, error)
+      }
+    }
+  }
+
+  func deleteAttendee(attendee: Attendee) {
+    let recordID = CKRecordID(recordName: attendee.recordName!)
+    database.deleteRecordWithID(recordID) { (record, error) in
+      if error == nil {
+        Mete.stores.currentAttendee.set(nil)
       }
     }
   }
