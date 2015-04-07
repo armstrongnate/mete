@@ -15,26 +15,26 @@ class MeetingViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var costLabel: UILabel!
+
   var totalWorth: Double = 0
   var durationSeconds: Double = 0
   var btManager: BluetoothAttendeeManager!
+  var attendee: Attendee!
+  var attendeeStore = AttendeeStore()
   var attendees: [Attendee] = [] {
     didSet {
       totalWorth = attendees.reduce(0.0, { $0 + $1.worth })
+      tableView.reloadData()
     }
   }
-  var meeting: Meeting? {
+  var meeting: Meeting! {
     didSet {
-      if let meeting = self.meeting {
-        Mete.api.getAttendees(meeting)
-        if let startedAt = meeting.startedAt {
-          if timer == nil {
-            durationSeconds = abs(startedAt.timeIntervalSinceNow)
-            startTimer()
-          }
+      Mete.api.getAttendees(meeting, store: attendeeStore)
+      if let startedAt = meeting.startedAt {
+        if timer == nil {
+          durationSeconds = abs(startedAt.timeIntervalSinceNow)
+          startTimer()
         }
-      } else {
-        exit()
       }
     }
   }
@@ -45,34 +45,32 @@ class MeetingViewController: UIViewController {
     formatter.numberStyle = .CurrencyStyle
     return formatter
   }()
-  var host: Bool {
-    if let attendee = Mete.stores.currentAttendee.get() {
-      return attendee.host
-    }
-    return false
-  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    timerView.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
+    attendeeStore.add(attendee)
 
+    // ui
+    timerView.backgroundColor = UIColor.primaryColor()
+
+    // bluetooth
     let displayName = UIDevice.currentDevice().name + "'s meeting."
     btManager = BluetoothAttendeeManager(displayName: displayName)
     btManager.delegate = self
 
     // only advertise if i am the host
-    if host {
+    if attendee.host {
       btManager.start()
     } else {
       playButtonContainer.hidden = true
       btManager.stop()
     }
 
-    getStateFromStores()
-    Mete.stores.currentMeeting.addChangeListener(self, selector: "onChange")
-    Mete.stores.attendee.addChangeListener(self, selector: "onChange")
-
+    // check server for updates
     refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refresh", userInfo: nil, repeats: true)
+
+    // get attendee store changes
+    attendeeStore.addChangeListener(self, selector: "onChange")
   }
 
   override func viewDidAppear(animated: Bool) {
@@ -81,9 +79,10 @@ class MeetingViewController: UIViewController {
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "editMeeting" {
-      let settings = segue.destinationViewController.topViewController as EditMeetingViewController
-      settings.title = "Edit Meeting"
+    if segue.identifier == "editProfile" {
+      let profile = segue.destinationViewController.topViewController as ProfileViewController
+      profile.attendee = attendee
+      profile.meeting = meeting
     }
   }
 
@@ -93,10 +92,8 @@ class MeetingViewController: UIViewController {
     }) { (completed) -> Void in
       self.playButtonContainer.hidden = true
       self.startTimer()
-      if let meeting = self.meeting {
-        meeting.startedAt = NSDate()
-        Mete.api.saveMeeting(meeting)
-      }
+      self.meeting.startedAt = NSDate()
+      Mete.api.saveMeeting(self.meeting)
     }
   }
 
@@ -110,42 +107,29 @@ class MeetingViewController: UIViewController {
     refreshTimer.invalidate()
     NSNotificationCenter.defaultCenter().removeObserver(self)
 
-    // delete attendee (clears currentAttendee on success)
-    if let attendee = Mete.stores.currentAttendee.get() {
-      Mete.api.deleteAttendee(attendee)
-    }
+    // delete attendee
+    Mete.api.deleteAttendee(attendee)
 
-    // delete meeting (clears currentMeeting on success)
-    if let meeting = Mete.stores.currentMeeting.get() {
-      if host {
-        Mete.api.deleteMeeting(meeting)
+    // delete meeting
+    if attendee.host {
+      Mete.api.deleteMeeting(meeting) {
+        // noop
       }
     }
 
     // exit to welcome view controller
     let window = UIApplication.sharedApplication().delegate!.window!!
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let welcomeVC = storyboard.instantiateViewControllerWithIdentifier("welcomeVC") as ViewController
-    window.rootViewController = welcomeVC
-  }
-
-  @IBAction func unwindFromEditMeeting(segue: UIStoryboardSegue) {
-    dismissViewControllerAnimated(true, completion: nil)
+    let editVC = storyboard.instantiateViewControllerWithIdentifier("editMeetingVC") as EditMeetingViewController
+    let nav = UINavigationController(rootViewController: editVC)
+    window.rootViewController = nav
   }
 
   @IBAction func unwindFromEditProfile(segue: UIStoryboardSegue) {
     dismissViewControllerAnimated(true, completion: nil)
-  }
-
-  func getStateFromStores() {
-    meeting = Mete.stores.currentMeeting.get()
-    attendees = Mete.stores.attendee.getAllAlpha()
-    title = meeting?.name ?? "Meeting"
-  }
-
-  func onChange() {
-    getStateFromStores()
-    tableView.reloadData()
+    if let attendee = (segue.sourceViewController as ProfileViewController).attendee {
+      attendeeStore.update(attendee)
+    }
   }
 
   func tick() {
@@ -168,9 +152,15 @@ class MeetingViewController: UIViewController {
       Mete.api.getMeeting(email) { (record, error) in
         if error != nil {
           self.exit()
+        } else {
+          self.meeting = Meeting(record: record)
         }
       }
     }
+  }
+
+  func onChange() {
+    self.attendees = attendeeStore.getAllAlpha()
   }
 
 }

@@ -16,6 +16,7 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    println("viewDidLoad")
     let btnColor = UIColor(red: 182/255.0, green: 73/255.0, blue: 38/255.0, alpha: 1.0)
     hostButton.clipsToBounds = true
     hostButton.layer.cornerRadius = 5.0

@@ -19,7 +19,11 @@ class JoinTableViewController: UITableViewController {
   }
 
   func showBrowser() {
-    presentViewController(btManager.browser, animated: true, completion: nil)
+    let browser = btManager.browser
+    presentViewController(browser, animated: true) {
+      browser.title = "Nearby Meetings"
+      browser.navigationItem.rightBarButtonItem = nil
+    }
   }
 
 }
@@ -50,8 +54,10 @@ extension JoinTableViewController: BluetoothAttendeeManagerDelegate {
           self.btManager.disconnect()
 
           // create profile
+          let meeting = Meeting(record: record)
           let storyboard = UIStoryboard(name: "Main", bundle: nil)
           let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as ProfileViewController
+          profile.meeting = meeting
           let navController = UINavigationController(rootViewController: profile)
           self.btManager.browser.presentViewController(navController, animated: true, completion: nil)
         }

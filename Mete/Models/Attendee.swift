@@ -33,18 +33,6 @@ class Attendee: NSObject {
     super.init()
   }
 
-  class func currentRecordName() -> String? {
-    return NSUserDefaults.standardUserDefaults().stringForKey(kCurrentAttendeeRecordNameKey)
-  }
-
-  class func setCurrentRecordName(recordName: String) {
-    NSUserDefaults.standardUserDefaults().setObject(recordName, forKey: kCurrentAttendeeRecordNameKey)
-  }
-
-  class func generateRecordName() {
-    setCurrentRecordName(CKRecordID(recordName: "Attendee").recordName)
-  }
-
   func toCKRecord(record: CKRecord) -> CKRecord {
     record.setObject(name, forKey: "name")
     record.setObject(worth, forKey: "worth")

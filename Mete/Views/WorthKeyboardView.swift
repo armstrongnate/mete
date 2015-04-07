@@ -35,19 +35,23 @@ class WorthKeyboardView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     for button in buttons {
-      button.backgroundColor = UIColor(red: 227/255.0, green: 152/255.0, blue: 123/255.0, alpha: 0.42)
+      button.backgroundColor = UIColor.whiteColor()
       button.clipsToBounds = true
       button.layer.cornerRadius = 5.0
-      button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+      button.layer.borderColor = UIColor.primaryColor().CGColor
+      button.layer.borderWidth = 1.0
+      button.setTitleColor(UIColor.primaryColor(), forState: .Normal)
       button.titleLabel!.font = UIFont.systemFontOfSize(20)
     }
 
-    deleteButton.backgroundColor = UIColor(red: 227/255.0, green: 152/255.0, blue: 123/255.0, alpha: 0.42)
+    deleteButton.backgroundColor = UIColor.whiteColor()
     deleteButton.clipsToBounds = true
     deleteButton.layer.cornerRadius = 5.0
+    deleteButton.layer.borderColor = UIColor.primaryColor().CGColor
+    deleteButton.layer.borderWidth = 1.0
     deleteButton.imageView?.contentMode = .ScaleAspectFit
 
-    doneButton.backgroundColor = UIColor(red: 227/255.0, green: 152/255.0, blue: 123/255.0, alpha: 0.2)
+    doneButton.backgroundColor = UIColor.secondaryColor()
     doneButton.clipsToBounds = true
     doneButton.layer.cornerRadius = 5.0
     doneButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)

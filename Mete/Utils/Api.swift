@@ -32,7 +32,7 @@ class Api: NSObject {
     }
   }
 
-  func deleteMeeting(meeting: Meeting) {
+  func deleteMeeting(meeting: Meeting, completion: () -> Void) {
     let recordID = CKRecordID(recordName: meeting.email)
     database.deleteRecordWithID(recordID) { (record, error) in
       if error == nil {
@@ -74,7 +74,7 @@ class Api: NSObject {
     }
   }
 
-  func getAttendees(meeting: Meeting) {
+  func getAttendees(meeting: Meeting, store: AttendeeStore) {
     let meetingRecordID = CKRecordID(recordName: meeting.email)
     let meetingPredicate = NSPredicate(format: "meeting = %@", meetingRecordID)
     let query = CKQuery(recordType: "Attendee", predicate: meetingPredicate)
@@ -82,12 +82,12 @@ class Api: NSObject {
       if error == nil {
         let records = results as [CKRecord]
         let attendees = records.map { Attendee(record: $0) }
-        Mete.stores.attendee.create(attendees)
+        store.create(attendees)
       }
     }
   }
 
-  func createAttendee(attendee: Attendee, forMeeting meeting: Meeting, completion: CKRecordResponse? = nil) {
+  func createAttendee(attendee: Attendee, forMeeting meeting: Meeting, inStore store: AttendeeStore, completion: CKRecordResponse? = nil) {
     let record = attendee.toCKRecord(CKRecord(recordType: "Attendee"))
     let meetingRecordID = CKRecordID(recordName: meeting.email)
     let meetingRecord = CKRecord(recordType: "Meeting", recordID: meetingRecordID)
@@ -97,7 +97,7 @@ class Api: NSObject {
       func success() {
         attendee.recordName = record.recordID.recordName
         Mete.stores.currentAttendee.set(attendee)
-        Mete.stores.attendee.add(attendee)
+        store.add(attendee)
       }
       if error == nil {
         success()

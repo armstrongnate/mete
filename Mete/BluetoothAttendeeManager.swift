@@ -25,6 +25,7 @@ class BluetoothAttendeeManager: NSObject {
       session: self.session)
     browser.delegate = self
     browser.navigationItem.rightBarButtonItem = nil
+    browser.title = "Nearby Meetings"
     return browser
   }()
 

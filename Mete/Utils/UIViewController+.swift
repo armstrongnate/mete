@@ -19,10 +19,12 @@ extension UIViewController {
     view.pop_addAnimation(alphaAnimation, forKey: "animateAlpha")
   }
 
-  func goToMeeting() {
+  func goToMeeting(meeting: Meeting, attendee: Attendee) {
     let window = UIApplication.sharedApplication().delegate!.window!!
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let meetingVC = storyboard.instantiateViewControllerWithIdentifier("meetingVC") as MeetingViewController
+    meetingVC.meeting = meeting
+    meetingVC.attendee = attendee
     let navController = UINavigationController(rootViewController: meetingVC)
     UIView.transitionWithView(window, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
       window.rootViewController = navController

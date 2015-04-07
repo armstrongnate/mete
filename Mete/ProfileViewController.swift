@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
   @IBOutlet weak var worthLabel: UILabel!
   @IBOutlet weak var constraintToAnimate: NSLayoutConstraint!
   @IBOutlet weak var worthKeyboardView: WorthKeyboardView!
+  @IBOutlet weak var separator: UIView!
   lazy var loaderView: LoaderView = {
     let window = UIApplication.sharedApplication().keyWindow!
     let view = LoaderView(frame: window.frame)
@@ -23,25 +24,30 @@ class ProfileViewController: UIViewController {
     return view
   }()
 
+  var meeting: Meeting!
+  var attendee: Attendee?
   var worth: Worth!
   var host = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
     worth = Worth(value: 0.0)
-    view.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
+    view.backgroundColor = UIColor.whiteColor()
     worthKeyboardView.delegate = self
-    nameTextField.tintColor = UIColor.whiteColor()
-    if let attendee = Mete.stores.currentAttendee.get() {
+    nameTextField.tintColor = UIColor.primaryColor()
+    if let attendee = attendee {
       nameTextField.text = attendee.name
       worth.value = attendee.worth
       worthLabel.text = "$\(worth)"
     }
   }
+
   @IBAction func editWorth(sender: UITapGestureRecognizer) {
+    nameTextField.resignFirstResponder()
     navigationController?.navigationBarHidden = true
     nameTextFieldContainer.hidden = true
     nameHintLabel.hidden = true
+    separator.hidden = true
     worthKeyboardView.hidden = false
     var worthAnim = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
     worthAnim.springSpeed = 5.0
@@ -54,7 +60,7 @@ class ProfileViewController: UIViewController {
     self.showLoader(true)
     let name = nameTextField.text
     let worthValue = worth.value
-    if let attendee = Mete.stores.currentAttendee.get() {
+    if let attendee = attendee {
       attendee.name = name
       attendee.worth = worthValue
       self.updateAttendee(attendee)
@@ -65,13 +71,13 @@ class ProfileViewController: UIViewController {
   }
 
   private func createAttendee(attendee: Attendee) {
-    let meeting = Mete.stores.currentMeeting.get()!
+    let store = AttendeeStore()
     attendee.host = host
-    Mete.api.createAttendee(attendee, forMeeting: meeting) { (record, error) in
+    Mete.api.createAttendee(attendee, forMeeting: meeting, inStore: store) { (record, error) in
       self.showLoader(false)
       if error == nil {
         self.nameTextField.resignFirstResponder()
-        self.goToMeeting()
+        self.goToMeeting(self.meeting, attendee: attendee)
       } else {
         self.handleError(error)
       }
@@ -122,6 +128,7 @@ extension ProfileViewController: WorthKeyboardViewDelegate {
     worthKeyboardView.hidden = true
     nameTextFieldContainer.hidden = false
     nameHintLabel.hidden = false
+    separator.hidden = false
     var worthAnim = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
     worthAnim.springSpeed = 10.0
     worthAnim.springBounciness = 5.0

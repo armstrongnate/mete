@@ -16,8 +16,9 @@ class SearchViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
-    searchTextField.tintColor = UIColor.whiteColor()
+    searchTextField.tintColor = UIColor.primaryColor()
+    searchButton.layer.cornerRadius = 5.0
+    searchButton.clipsToBounds = true
   }
 
   @IBAction func search(sender: UIButton) {
@@ -26,8 +27,10 @@ class SearchViewController: UIViewController {
       spinner.hidden = false
       Mete.api.getMeeting(searchTextField.text) { (record, error) in
         if error == nil {
+          let meeting = Meeting(record: record)
           let storyboard = UIStoryboard(name: "Main", bundle: nil)
           let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as ProfileViewController
+          profile.meeting = meeting
           let navController = UINavigationController(rootViewController: profile)
           self.presentViewController(navController, animated: true, completion: nil)
         } else {

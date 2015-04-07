@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,13 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let navigationBarAppearance = UINavigationBar.appearance()
     navigationBarAppearance.setBackgroundImage(UIImage(), forBarMetrics: .Default)
     navigationBarAppearance.shadowImage = UIImage()
-    navigationBarAppearance.barTintColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
+    navigationBarAppearance.barTintColor = UIColor.primaryColor()
     navigationBarAppearance.translucent = false
     navigationBarAppearance.barStyle = .Black
     navigationBarAppearance.tintColor = UIColor.whiteColor()
     navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
 
-    window?.backgroundColor = UIColor(patternImage: UIImage(named: "pattern-bg")!)
+    window?.backgroundColor = UIColor.whiteColor()
 
     return true
   }
