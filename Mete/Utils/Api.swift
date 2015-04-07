@@ -82,6 +82,7 @@ class Api: NSObject {
       if error == nil {
         let records = results as [CKRecord]
         let attendees = records.map { Attendee(record: $0) }
+        store.clear()
         store.create(attendees)
       }
     }
