@@ -146,9 +146,11 @@ class MeetingViewController: UIViewController {
     let pMins = String(format: "%02d", minutes)
     let pSeconds = String(format: "%02d", seconds)
     let cost = (durationSeconds / 3600) * totalWorth
+    let 🕒 = "\(pHours):\(pMins):\(pSeconds)"
+    let 💰 = self.numberFormatter.stringFromNumber(NSNumber(double: cost))
     dispatch_async(dispatch_get_main_queue()) {
-      self.timeLabel.text = "\(pHours):\(pMins):\(pSeconds)"
-      self.costLabel.text = self.numberFormatter.stringFromNumber(NSNumber(double: cost))
+      self.timeLabel.text = 🕒
+      self.costLabel.text = 💰
     }
   }
 
