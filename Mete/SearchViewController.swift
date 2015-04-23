@@ -29,7 +29,7 @@ class SearchViewController: UIViewController {
         if error == nil {
           let meeting = Meeting(record: record)
           let storyboard = UIStoryboard(name: "Main", bundle: nil)
-          let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as ProfileViewController
+          let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as! ProfileViewController
           profile.meeting = meeting
           let navController = UINavigationController(rootViewController: profile)
           self.presentViewController(navController, animated: true, completion: nil)

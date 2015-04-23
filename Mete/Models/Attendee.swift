@@ -26,10 +26,10 @@ class Attendee: NSObject {
   }
 
   init(record: CKRecord) {
-    self.name = record.objectForKey("name") as String
-    self.worth = record.objectForKey("worth") as Double
+    self.name = record.objectForKey("name") as! String
+    self.worth = record.objectForKey("worth") as! Double
     self.recordName = record.recordID.recordName
-    self.host = record.objectForKey("host") as Bool
+    self.host = record.objectForKey("host") as! Bool
     super.init()
   }
 

@@ -75,7 +75,7 @@ extension BluetoothAttendeeManager: MCSessionDelegate {
     fromPeer peerID: MCPeerID!)  {
       dispatch_async(dispatch_get_main_queue()) {
         let email = NSString(data: data, encoding: NSUTF8StringEncoding)
-        self.delegate?.receivedMeetingEmail?(email!)
+        self.delegate?.receivedMeetingEmail?(email! as String)
       }
   }
 

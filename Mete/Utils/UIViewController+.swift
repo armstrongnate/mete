@@ -22,7 +22,7 @@ extension UIViewController {
   func goToMeeting(meeting: Meeting, attendee: Attendee) {
     let window = UIApplication.sharedApplication().delegate!.window!!
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let meetingVC = storyboard.instantiateViewControllerWithIdentifier("meetingVC") as MeetingViewController
+    let meetingVC = storyboard.instantiateViewControllerWithIdentifier("meetingVC") as! MeetingViewController
     meetingVC.meeting = meeting
     meetingVC.attendee = attendee
     let navController = UINavigationController(rootViewController: meetingVC)

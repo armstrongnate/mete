@@ -23,7 +23,7 @@ class MeetingViewController: UIViewController {
   var attendeeStore = AttendeeStore()
   var attendees: [Attendee] = [] {
     didSet {
-      totalWorth = attendees.reduce(0.0, { $0 + $1.worth })
+      totalWorth = attendees.reduce(0.0, combine: { $0 + $1.worth })
       tableView.reloadData()
     }
   }
@@ -31,8 +31,8 @@ class MeetingViewController: UIViewController {
     didSet {
       Mete.api.getAttendees(meeting, store: attendeeStore)
       if let startedAt = meeting.startedAt {
+        durationSeconds = abs(startedAt.timeIntervalSinceNow)
         if timer == nil {
-          durationSeconds = abs(startedAt.timeIntervalSinceNow)
           startTimer()
         }
       }
@@ -60,6 +60,8 @@ class MeetingViewController: UIViewController {
 
     // only advertise if i am the host
     if attendee.host {
+      timeLabel.hidden = true
+      costLabel.hidden = true
       btManager.start()
     } else {
       playButtonContainer.hidden = true
@@ -67,7 +69,8 @@ class MeetingViewController: UIViewController {
     }
 
     // check server for updates
-    refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refresh", userInfo: nil, repeats: true)
+    refreshTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "refresh", userInfo: nil, repeats: true)
+    refreshTimer.fire()
 
     // get attendee store changes
     attendeeStore.addChangeListener(self, selector: "onChange")
@@ -80,7 +83,7 @@ class MeetingViewController: UIViewController {
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "editProfile" {
-      let profile = segue.destinationViewController.topViewController as ProfileViewController
+      let profile = segue.destinationViewController.topViewController as! ProfileViewController
       profile.attendee = attendee
       profile.meeting = meeting
     }
@@ -88,6 +91,8 @@ class MeetingViewController: UIViewController {
 
   @IBAction func play() {
     UIView.animateWithDuration(0.5, animations: { () -> Void in
+      self.costLabel.hidden = false
+      self.timeLabel.hidden = false
       self.playButtonContainer.alpha = 0.0
     }) { (completed) -> Void in
       self.playButtonContainer.hidden = true
@@ -120,14 +125,14 @@ class MeetingViewController: UIViewController {
     // exit to welcome view controller
     let window = UIApplication.sharedApplication().delegate!.window!!
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let editVC = storyboard.instantiateViewControllerWithIdentifier("editMeetingVC") as EditMeetingViewController
+    let editVC = storyboard.instantiateViewControllerWithIdentifier("editMeetingVC") as! EditMeetingViewController
     let nav = UINavigationController(rootViewController: editVC)
     window.rootViewController = nav
   }
 
   @IBAction func unwindFromEditProfile(segue: UIStoryboardSegue) {
     dismissViewControllerAnimated(true, completion: nil)
-    if let attendee = (segue.sourceViewController as ProfileViewController).attendee {
+    if let attendee = (segue.sourceViewController as! ProfileViewController).attendee {
       attendeeStore.update(attendee)
     }
   }
@@ -182,7 +187,7 @@ extension MeetingViewController: UITableViewDataSource {
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("attendeeCell", forIndexPath: indexPath) as UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("attendeeCell", forIndexPath: indexPath) as! UITableViewCell
     cell.textLabel!.text = attendees[indexPath.row].name
     return cell
   }

@@ -62,7 +62,7 @@ class EditMeetingViewController: UIViewController {
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "editProfile" {
-      let profile = segue.destinationViewController.topViewController as ProfileViewController
+      let profile = segue.destinationViewController.topViewController as! ProfileViewController
       profile.host = true
       profile.meeting = formData
     }

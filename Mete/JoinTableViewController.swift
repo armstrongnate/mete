@@ -56,7 +56,7 @@ extension JoinTableViewController: BluetoothAttendeeManagerDelegate {
           // create profile
           let meeting = Meeting(record: record)
           let storyboard = UIStoryboard(name: "Main", bundle: nil)
-          let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as ProfileViewController
+          let profile = storyboard.instantiateViewControllerWithIdentifier("profileVC") as! ProfileViewController
           profile.meeting = meeting
           let navController = UINavigationController(rootViewController: profile)
           self.btManager.browser.presentViewController(navController, animated: true, completion: nil)

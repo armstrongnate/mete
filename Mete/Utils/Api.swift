@@ -80,7 +80,7 @@ class Api: NSObject {
     let query = CKQuery(recordType: "Attendee", predicate: meetingPredicate)
     self.database.performQuery(query, inZoneWithID: nil) { (results, error) -> Void in
       if error == nil {
-        let records = results as [CKRecord]
+        let records = results as! [CKRecord]
         let attendees = records.map { Attendee(record: $0) }
         store.clear()
         store.create(attendees)

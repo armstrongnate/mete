@@ -11,8 +11,8 @@ import UIKit
 class WorthSegue: UIStoryboardSegue {
 
   override func perform() {
-    var profile = sourceViewController as ProfileViewController
-    var worth = destinationViewController as WorthViewController
+    var profile = sourceViewController as! ProfileViewController
+    var worth = destinationViewController as! WorthViewController
 
     UIView.animateWithDuration(1.0) {
       println("seriously?")
@@ -40,8 +40,8 @@ class WorthSegue: UIStoryboardSegue {
 class WorthUnwindSegue: UIStoryboardSegue {
 
   override func perform() {
-    var worth = sourceViewController as WorthViewController
-    var profile = destinationViewController as ProfileViewController
+    var worth = sourceViewController as! WorthViewController
+    var profile = destinationViewController as! ProfileViewController
 
     profile.navigationController?.navigationBarHidden = false
 

@@ -24,8 +24,8 @@ class Meeting: NSObject {
   }
 
   init(record: CKRecord) {
-    self.name = record.objectForKey("name") as String
-    self.email = record.objectForKey("email") as String
+    self.name = record.objectForKey("name") as! String
+    self.email = record.objectForKey("email") as! String
     self.startedAt = record.objectForKey("startedAt") as? NSDate
     super.init()
   }
